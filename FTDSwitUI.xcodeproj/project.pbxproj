@@ -16,6 +16,13 @@
 		FC4AFEDD2729DF5C005890A8 /* FTDSwitUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4AFEDC2729DF5C005890A8 /* FTDSwitUIUITestsLaunchTests.swift */; };
 		FC6339152729F9D200AA7268 /* FTDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6339142729F9D200AA7268 /* FTDButton.swift */; };
 		FC6339172729FA7F00AA7268 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6339162729FA7F00AA7268 /* Constants.swift */; };
+		FC633922272A1C9600AA7268 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC633921272A1C9600AA7268 /* ImagePicker.swift */; };
+		FC633924272A452900AA7268 /* ScanImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC633923272A452900AA7268 /* ScanImageView.swift */; };
+		FC633927272A456100AA7268 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC633926272A456100AA7268 /* ResultView.swift */; };
+		FC63392C272A56C900AA7268 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63392B272A56C900AA7268 /* HomeViewModel.swift */; };
+		FC63392F272A5C3F00AA7268 /* ScanImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63392E272A5C3F00AA7268 /* ScanImageViewModel.swift */; };
+		FC633958272F775000AA7268 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC633957272F774F00AA7268 /* Alert.swift */; };
+		FC63395B272F77D200AA7268 /* FTDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63395A272F77D200AA7268 /* FTDAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,13 @@
 		FC4AFEDC2729DF5C005890A8 /* FTDSwitUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDSwitUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FC6339142729F9D200AA7268 /* FTDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDButton.swift; sourceTree = "<group>"; };
 		FC6339162729FA7F00AA7268 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FC633921272A1C9600AA7268 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FC633923272A452900AA7268 /* ScanImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanImageView.swift; sourceTree = "<group>"; };
+		FC633926272A456100AA7268 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		FC63392B272A56C900AA7268 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FC63392E272A5C3F00AA7268 /* ScanImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanImageViewModel.swift; sourceTree = "<group>"; };
+		FC633957272F774F00AA7268 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		FC63395A272F77D200AA7268 /* FTDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,12 +112,13 @@
 		FC4AFEBE2729DF57005890A8 /* FTDSwitUI */ = {
 			isa = PBXGroup;
 			children = (
+				FC633929272A459C00AA7268 /* Utilities */,
+				FC633925272A453200AA7268 /* Screens */,
+				FC633928272A457700AA7268 /* Views */,
+				FC633921272A1C9600AA7268 /* ImagePicker.swift */,
 				FC4AFEBF2729DF57005890A8 /* FTDSwitUIApp.swift */,
-				FC4AFEC12729DF57005890A8 /* HomeView.swift */,
 				FC4AFEC32729DF5C005890A8 /* Assets.xcassets */,
 				FC4AFEC52729DF5C005890A8 /* Preview Content */,
-				FC6339142729F9D200AA7268 /* FTDButton.swift */,
-				FC6339162729FA7F00AA7268 /* Constants.swift */,
 			);
 			path = FTDSwitUI;
 			sourceTree = "<group>";
@@ -131,6 +146,60 @@
 				FC4AFEDC2729DF5C005890A8 /* FTDSwitUIUITestsLaunchTests.swift */,
 			);
 			path = FTDSwitUIUITests;
+			sourceTree = "<group>";
+		};
+		FC633925272A453200AA7268 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				FC63392A272A56B600AA7268 /* HomeView */,
+				FC63392D272A5C0F00AA7268 /* Scan Preview */,
+				FC633926272A456100AA7268 /* ResultView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		FC633928272A457700AA7268 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC6339142729F9D200AA7268 /* FTDButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FC633929272A459C00AA7268 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FC633959272F77C100AA7268 /* Alert */,
+				FC6339162729FA7F00AA7268 /* Constants.swift */,
+				FC633957272F774F00AA7268 /* Alert.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FC63392A272A56B600AA7268 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				FC4AFEC12729DF57005890A8 /* HomeView.swift */,
+				FC63392B272A56C900AA7268 /* HomeViewModel.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		FC63392D272A5C0F00AA7268 /* Scan Preview */ = {
+			isa = PBXGroup;
+			children = (
+				FC633923272A452900AA7268 /* ScanImageView.swift */,
+				FC63392E272A5C3F00AA7268 /* ScanImageViewModel.swift */,
+			);
+			path = "Scan Preview";
+			sourceTree = "<group>";
+		};
+		FC633959272F77C100AA7268 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				FC63395A272F77D200AA7268 /* FTDAlert.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,8 +334,15 @@
 			files = (
 				FC4AFEC22729DF57005890A8 /* HomeView.swift in Sources */,
 				FC6339152729F9D200AA7268 /* FTDButton.swift in Sources */,
+				FC63395B272F77D200AA7268 /* FTDAlert.swift in Sources */,
+				FC633922272A1C9600AA7268 /* ImagePicker.swift in Sources */,
+				FC63392C272A56C900AA7268 /* HomeViewModel.swift in Sources */,
 				FC4AFEC02729DF57005890A8 /* FTDSwitUIApp.swift in Sources */,
+				FC63392F272A5C3F00AA7268 /* ScanImageViewModel.swift in Sources */,
 				FC6339172729FA7F00AA7268 /* Constants.swift in Sources */,
+				FC633927272A456100AA7268 /* ResultView.swift in Sources */,
+				FC633958272F775000AA7268 /* Alert.swift in Sources */,
+				FC633924272A452900AA7268 /* ScanImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

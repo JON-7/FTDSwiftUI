@@ -14,6 +14,6 @@ struct CustomColor {
 }
 
 struct AppImages {
-    static let appLogo = "appLogo"
+    static let appLogo = UIImage(named: "appLogo")!
     static let infoCircle = "info.circle"
 }
