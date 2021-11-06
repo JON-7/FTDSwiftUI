@@ -15,7 +15,7 @@ struct FTDButton: View {
             .frame(width: UIScreen.main.bounds.width * 0.9,
                    height: 60)
             .foregroundColor(.white)
-            .background(Color("tweetColor"))
+            .background(Color.tweetColor)
             .font(.title2)
             .cornerRadius(30)
     }

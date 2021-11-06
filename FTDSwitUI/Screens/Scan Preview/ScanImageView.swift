@@ -10,23 +10,24 @@ import SwiftUI
 struct ScanImageView: View {
     
     @ObservedObject var viewModel: HomeViewModel
+    @StateObject var scanViewModel = ScanImageViewModel()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
-            CustomColor.backgroundColor.ignoresSafeArea()
+            Color.mainBackgroundColor.ignoresSafeArea()
             VStack {
                 VStack {
                     Spacer()
                     
                     if let tweetImage = viewModel.tweetImage {
                         // Displays image that will be scanned
-                            TweetImage(image: tweetImage)
+                        TweetImage(image: tweetImage)
                     }
                     
                     // Scan Button
                     Button {
-                        
+                        getImageInfo()
                     } label: {
                         ScanButton()
                     }
@@ -46,12 +47,10 @@ struct ScanImageView: View {
                 }, alignment: .topTrailing)
         }
     }
-}
-
-struct ScanImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScanImageView(viewModel: HomeViewModel())
-            .preferredColorScheme(.dark)
+    
+    private func getImageInfo() {
+        let imageText = scanViewModel.scanImage(vm: viewModel)
+        let info = scanViewModel.getTweetInfo(text: imageText)
     }
 }
 
@@ -63,7 +62,7 @@ struct XButton: View {
                 .foregroundColor(.white)
                 .opacity(0.6)
             
-            Image(systemName: "xmark")
+            AppImages.xmark
                 .imageScale(.small)
                 .frame(width: 44, height: 44)
                 .foregroundColor(.black)
@@ -77,7 +76,7 @@ struct ScanButton: View {
             .frame(width: UIScreen.main.bounds.width * 0.6,
                    height: 50)
             .foregroundColor(.white)
-            .background(Color("tweetColor"))
+            .background(Color.tweetColor)
             .font(.title2)
             .cornerRadius(12)
             .padding(.top, 20)
@@ -93,5 +92,12 @@ struct TweetImage: View {
             .aspectRatio(contentMode: .fit)
             .cornerRadius(12)
             .frame(maxWidth: UIScreen.main.bounds.width * 0.8)
+    }
+}
+
+struct ScanImageView_Previews: PreviewProvider {
+    static var previews: some View {
+        ScanImageView(viewModel: HomeViewModel())
+            .preferredColorScheme(.dark)
     }
 }

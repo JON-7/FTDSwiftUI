@@ -13,10 +13,10 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            CustomColor.backgroundColor.ignoresSafeArea()
+            Color.mainBackgroundColor.ignoresSafeArea()
             
             VStack {
-                Image(uiImage: AppImages.appLogo)
+                AppImages.appLogo
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.6,
                            height: UIScreen.main.bounds.width * 0.6)
@@ -24,7 +24,8 @@ struct HomeView: View {
                     .padding(.bottom, 50)
                 
                 Button {
-                    //viewModel.isSheetSelected = true
+                    viewModel.isSheetSelected = true
+                    viewModel.currentSheet = .camera
                 } label: {
                     FTDButton(title: "Take Photo")
                         .padding(.bottom, 30)
@@ -32,17 +33,17 @@ struct HomeView: View {
                 
                 Button {
                     viewModel.isSheetSelected = true
-                    viewModel.currentSheet = .imagePicker
+                    viewModel.currentSheet = .photoLibrary
                 } label: {
                     FTDButton(title: "Photo Library")
                 }
 
                 .fullScreenCover(isPresented: $viewModel.isSheetSelected) {
                     switch viewModel.currentSheet {
-                    case .imagePicker:
-                        ImagePicker(viewModel: viewModel)
-                    case .scanImage:
-                        ScanImageView(viewModel: viewModel)
+                    case .camera:
+                        ImagePicker(viewModel: viewModel, sourceType: .camera)
+                    case .photoLibrary:
+                        ImagePicker(viewModel: viewModel, sourceType: .photoLibrary)
                     default:
                         ScanImageView(viewModel: viewModel)
                     }
@@ -73,7 +74,7 @@ struct InfoButton: View {
                     .renderingMode(.original)
                     .padding()
                     .padding(.leading, UIScreen.main.bounds.width * 0.05)
-                    .foregroundColor(CustomColor.tweetColor)
+                    .foregroundColor(Color.tweetColor)
                     .font(.title2)
             }
             Spacer()
@@ -82,52 +83,7 @@ struct InfoButton: View {
 }
 
 enum SheetContent {
-    case imagePicker
+    case photoLibrary
+    case camera
     case scanImage
-}
-
-
-struct SomeView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    @Binding var image: Image?
-    
-    var body: some View {
-        ZStack {
-            
-            Color.gray.ignoresSafeArea()
-            
-            VStack {
-                
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 50, height: 50)
-                            .padding()
-                            .overlay(
-                                Image(systemName: "xmark")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.black)
-                            )
-                    }
-                    Spacer()
-                }
-                
-                Spacer()
-                
-                Text("SOME VIEW")
-                image?
-                    .resizable()
-                    .frame(width: 300, height: 300)
-                    .cornerRadius(10)
-                    .scaledToFit()
-                
-                Spacer()
-                
-            }
-        }
-    }
 }

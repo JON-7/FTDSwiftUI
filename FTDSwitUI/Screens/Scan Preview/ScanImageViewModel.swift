@@ -10,17 +10,12 @@ import Vision
 
 final class ScanImageViewModel: ObservableObject {
     
-    @ObservedObject var viewModel = HomeViewModel()
+    @Published var fullText = ""
     
-    func scanImage() -> String {
-        
+    func scanImage(vm: HomeViewModel) -> String {
         var text = ""
         
-        if viewModel.tweetImage == nil {
-            
-        }
-        
-        guard let cgImage = viewModel.tweetImage?.cgImage else {
+        guard let cgImage = vm.tweetImage?.cgImage else {
             return ""
         }
         
@@ -50,12 +45,14 @@ final class ScanImageViewModel: ObservableObject {
         let randomId = UUID()
         var filteredText = ""
         var tweetText = ""
+        var username = ""
         
         // Finding the Tweet date
-        guard let datePattern = text.matches(for: pattern).first
+        guard var datePattern = text.matches(for: pattern).first
         else {
             return TweetBody(username: "", tweetText: "", date: "")
         }
+        datePattern = getTweetDateFormated(stringDate: datePattern)
         
         //Finding the Tweet body
         filteredText = text.replacingOccurrences(of: datePattern, with: "\(randomId)")
@@ -67,49 +64,39 @@ final class ScanImageViewModel: ObservableObject {
         // Finding the username
         let usernames = tweetArray.filter { $0.contains("@")}
         
-        return TweetBody(username: usernames.first ?? "",
+        if let firstUsername = usernames.first {
+            username = String(firstUsername.replacingOccurrences(of: "@", with: ""))
+        }
+        
+        return TweetBody(username: username,
                          tweetText: tweetText,
                          date: datePattern)
     }
-}
-
-struct Tweet {
-    let handle: String
-    let body: String
-    let date: String
     
-    init(handle: String, body: String, date: String) {
-        self.handle = handle
-        self.body = body
-        self.date = date
-    }
-}
-
-
-struct TweetBody {
-    var username: String
-    var tweetText: String
-    var date: String
-}
-
-enum TweetDateRegex {
-    static let hrMinRegex = "[0-9]*:[0-9]{2}"
-    static let dayRegex = "[0-9]*,"
-    static let monthRegex = "[aA-zZ]{3}"
-    static let yearRegex = "[0-9]{4}"
-}
-
-extension String {
-    func matches(for regex: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: self, range: NSRange(self.startIndex..., in: self))
-            return results.map {
-                String(self[Range($0.range, in: self)!])
+    func getTwitterID(username: String) -> String {
+        var twitterID = ""
+        NetworkLayer.request(endpoint: TwitterEndpoint.getTwitterID(username: username)) { (result: Result<TwitterID, Error>) in
+            switch result {
+            case .success(let ID):
+                twitterID = ID.data.first?.id ?? "0"
+            case .failure(let error):
+                twitterID = error.localizedDescription
             }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
         }
+        return twitterID
     }
+    
+//    func getUserTweets(id: String) -> UserTweets {
+//
+//    }
+
+}
+
+func getTweetDateFormated(stringDate: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "h:mm a MMM dd, yyyy"
+    let date = dateFormatter.date(from: stringDate) ?? Date()
+    let stringDate = dateFormatter.string(from: date)
+    
+    return stringDate
 }

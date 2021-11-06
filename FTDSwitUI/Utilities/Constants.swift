@@ -7,13 +7,8 @@
 
 import SwiftUI
 
-struct CustomColor {
-    static let backgroundColor = Color("backgroundColor")
-    static let tweetColor = Color("tweetColor")
-    static let textColor = Color("textColor")
-}
-
 struct AppImages {
-    static let appLogo = UIImage(named: "appLogo")!
+    static let appLogo = Image("appLogo")
     static let infoCircle = "info.circle"
+    static let xmark = Image(systemName: "xmark")
 }

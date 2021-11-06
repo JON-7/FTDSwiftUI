@@ -23,6 +23,15 @@
 		FC63392F272A5C3F00AA7268 /* ScanImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63392E272A5C3F00AA7268 /* ScanImageViewModel.swift */; };
 		FC633958272F775000AA7268 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC633957272F774F00AA7268 /* Alert.swift */; };
 		FC63395B272F77D200AA7268 /* FTDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63395A272F77D200AA7268 /* FTDAlert.swift */; };
+		FCB958E92734E73D00FD8614 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958E82734E73D00FD8614 /* String+Extension.swift */; };
+		FCB958EB2734E77500FD8614 /* TweetBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958EA2734E77500FD8614 /* TweetBody.swift */; };
+		FCB958ED2734E87100FD8614 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958EC2734E87100FD8614 /* Color+Extension.swift */; };
+		FCB958F22735F0C700FD8614 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958F12735F0C700FD8614 /* NetworkLayer.swift */; };
+		FCB958F42735F11C00FD8614 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958F32735F11B00FD8614 /* Endpoint.swift */; };
+		FCB958F62735F3B900FD8614 /* TwitterEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958F52735F3B900FD8614 /* TwitterEndpoint.swift */; };
+		FCB958F82735FE7200FD8614 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958F72735FE7200FD8614 /* Keys.swift */; };
+		FCB958FA273605DD00FD8614 /* TwitterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958F9273605DD00FD8614 /* TwitterID.swift */; };
+		FCB958FC27360FA600FD8614 /* UserTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB958FB27360FA600FD8614 /* UserTweets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +71,15 @@
 		FC63392E272A5C3F00AA7268 /* ScanImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanImageViewModel.swift; sourceTree = "<group>"; };
 		FC633957272F774F00AA7268 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FC63395A272F77D200AA7268 /* FTDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDAlert.swift; sourceTree = "<group>"; };
+		FCB958E82734E73D00FD8614 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		FCB958EA2734E77500FD8614 /* TweetBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetBody.swift; sourceTree = "<group>"; };
+		FCB958EC2734E87100FD8614 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		FCB958F12735F0C700FD8614 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		FCB958F32735F11B00FD8614 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		FCB958F52735F3B900FD8614 /* TwitterEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterEndpoint.swift; sourceTree = "<group>"; };
+		FCB958F72735FE7200FD8614 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		FCB958F9273605DD00FD8614 /* TwitterID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterID.swift; sourceTree = "<group>"; };
+		FCB958FB27360FA600FD8614 /* UserTweets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTweets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +130,15 @@
 		FC4AFEBE2729DF57005890A8 /* FTDSwitUI */ = {
 			isa = PBXGroup;
 			children = (
+				FCB958F02735F09300FD8614 /* Network */,
+				FCB958E72734E72200FD8614 /* Extensions */,
 				FC633929272A459C00AA7268 /* Utilities */,
+				FCB958E62734DA2E00FD8614 /* Model */,
 				FC633925272A453200AA7268 /* Screens */,
 				FC633928272A457700AA7268 /* Views */,
 				FC633921272A1C9600AA7268 /* ImagePicker.swift */,
 				FC4AFEBF2729DF57005890A8 /* FTDSwitUIApp.swift */,
+				FCB958F72735FE7200FD8614 /* Keys.swift */,
 				FC4AFEC32729DF5C005890A8 /* Assets.xcassets */,
 				FC4AFEC52729DF5C005890A8 /* Preview Content */,
 			);
@@ -200,6 +222,35 @@
 				FC63395A272F77D200AA7268 /* FTDAlert.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		FCB958E62734DA2E00FD8614 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCB958EA2734E77500FD8614 /* TweetBody.swift */,
+				FCB958F32735F11B00FD8614 /* Endpoint.swift */,
+				FCB958F52735F3B900FD8614 /* TwitterEndpoint.swift */,
+				FCB958F9273605DD00FD8614 /* TwitterID.swift */,
+				FCB958FB27360FA600FD8614 /* UserTweets.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FCB958E72734E72200FD8614 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FCB958E82734E73D00FD8614 /* String+Extension.swift */,
+				FCB958EC2734E87100FD8614 /* Color+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FCB958F02735F09300FD8614 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FCB958F12735F0C700FD8614 /* NetworkLayer.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,13 +384,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC4AFEC22729DF57005890A8 /* HomeView.swift in Sources */,
+				FCB958ED2734E87100FD8614 /* Color+Extension.swift in Sources */,
 				FC6339152729F9D200AA7268 /* FTDButton.swift in Sources */,
+				FCB958F22735F0C700FD8614 /* NetworkLayer.swift in Sources */,
 				FC63395B272F77D200AA7268 /* FTDAlert.swift in Sources */,
 				FC633922272A1C9600AA7268 /* ImagePicker.swift in Sources */,
+				FCB958EB2734E77500FD8614 /* TweetBody.swift in Sources */,
+				FCB958F82735FE7200FD8614 /* Keys.swift in Sources */,
+				FCB958E92734E73D00FD8614 /* String+Extension.swift in Sources */,
 				FC63392C272A56C900AA7268 /* HomeViewModel.swift in Sources */,
 				FC4AFEC02729DF57005890A8 /* FTDSwitUIApp.swift in Sources */,
+				FCB958F42735F11C00FD8614 /* Endpoint.swift in Sources */,
 				FC63392F272A5C3F00AA7268 /* ScanImageViewModel.swift in Sources */,
 				FC6339172729FA7F00AA7268 /* Constants.swift in Sources */,
+				FCB958FC27360FA600FD8614 /* UserTweets.swift in Sources */,
+				FCB958FA273605DD00FD8614 /* TwitterID.swift in Sources */,
+				FCB958F62735F3B900FD8614 /* TwitterEndpoint.swift in Sources */,
 				FC633927272A456100AA7268 /* ResultView.swift in Sources */,
 				FC633958272F775000AA7268 /* Alert.swift in Sources */,
 				FC633924272A452900AA7268 /* ScanImageView.swift in Sources */,
@@ -506,6 +566,7 @@
 				DEVELOPMENT_TEAM = B43W8HTAW5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use camera to take picture of tweet";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -536,6 +597,7 @@
 				DEVELOPMENT_TEAM = B43W8HTAW5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use camera to take picture of tweet";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
