@@ -10,5 +10,6 @@ import Foundation
 struct TweetBody {
     var username: String
     var tweetText: String
-    var date: String
+    var stringDate: String
+    var date: Date
 }

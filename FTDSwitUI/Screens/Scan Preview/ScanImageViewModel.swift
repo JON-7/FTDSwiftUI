@@ -48,14 +48,13 @@ final class ScanImageViewModel: ObservableObject {
         var username = ""
         
         // Finding the Tweet date
-        guard var datePattern = text.matches(for: pattern).first
-        else {
-            return TweetBody(username: "", tweetText: "", date: "")
+        guard var datePattern = text.matches(for: pattern).first else {
+            return TweetBody(username: "", tweetText: "", stringDate: "", date: Date())
         }
-        datePattern = getTweetDateFormated(stringDate: datePattern)
         
         //Finding the Tweet body
         filteredText = text.replacingOccurrences(of: datePattern, with: "\(randomId)")
+        
         let tweetArray = filteredText.components(separatedBy: " ")
         if let dateIndex = tweetArray.firstIndex(of: "\(randomId)") {
             tweetText = tweetArray.prefix(dateIndex).joined(separator: " ")
@@ -68,35 +67,31 @@ final class ScanImageViewModel: ObservableObject {
             username = String(firstUsername.replacingOccurrences(of: "@", with: ""))
         }
         
+        datePattern = getTweetDateFormated(stringDate: datePattern)
+        
         return TweetBody(username: username,
                          tweetText: tweetText,
-                         date: datePattern)
+                         stringDate: datePattern,
+                         date: getTweetDate(stringDate: datePattern))
     }
     
-    func getTwitterID(username: String) -> String {
-        var twitterID = ""
-        NetworkLayer.request(endpoint: TwitterEndpoint.getTwitterID(username: username)) { (result: Result<TwitterID, Error>) in
-            switch result {
-            case .success(let ID):
-                twitterID = ID.data.first?.id ?? "0"
-            case .failure(let error):
-                twitterID = error.localizedDescription
-            }
-        }
-        return twitterID
+    func getTweetDateFormated(stringDate: String) -> String {
+        var cleanString = stringDate.replacingOccurrences(of: "•", with: "")
+        cleanString = cleanString.condenseWhitespace()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a MMM dd, yyyy"
+        let date = dateFormatter.date(from: cleanString) ?? Date()
+        let stringDate = dateFormatter.string(from: date)
+        
+        return stringDate
     }
     
-//    func getUserTweets(id: String) -> UserTweets {
-//
-//    }
-
-}
-
-func getTweetDateFormated(stringDate: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "h:mm a MMM dd, yyyy"
-    let date = dateFormatter.date(from: stringDate) ?? Date()
-    let stringDate = dateFormatter.string(from: date)
-    
-    return stringDate
+    func getTweetDate(stringDate: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a MMM dd, yyyy"
+        let date = formatter.date(from: stringDate)
+        
+        return date ?? Date()
+    }
 }

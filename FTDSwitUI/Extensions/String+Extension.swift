@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension String {
+    
     func matches(for regex: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex)
@@ -19,5 +20,10 @@ extension String {
             print("invalid regex: \(error.localizedDescription)")
             return []
         }
+    }
+    
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: .whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
 }

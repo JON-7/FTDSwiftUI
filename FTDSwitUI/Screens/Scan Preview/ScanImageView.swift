@@ -12,6 +12,7 @@ struct ScanImageView: View {
     @ObservedObject var viewModel: HomeViewModel
     @StateObject var scanViewModel = ScanImageViewModel()
     @Environment(\.dismiss) var dismiss
+    @State var isSheetSelected = false
     
     var body: some View {
         ZStack {
@@ -27,9 +28,14 @@ struct ScanImageView: View {
                     
                     // Scan Button
                     Button {
-                        getImageInfo()
+                        isSheetSelected = true
                     } label: {
                         ScanButton()
+                    }
+                    .fullScreenCover(isPresented: $isSheetSelected) {
+                        let imageText = scanViewModel.scanImage(vm: viewModel)
+                        let tweetBody = scanViewModel.getTweetInfo(text: imageText)
+                        ResultView(tweetBody: tweetBody)
                     }
                     Spacer()
                 }
@@ -46,11 +52,6 @@ struct ScanImageView: View {
                     XButton()
                 }, alignment: .topTrailing)
         }
-    }
-    
-    private func getImageInfo() {
-        let imageText = scanViewModel.scanImage(vm: viewModel)
-        let info = scanViewModel.getTweetInfo(text: imageText)
     }
 }
 

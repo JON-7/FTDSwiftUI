@@ -8,7 +8,7 @@
 import Foundation
 
 struct TweetData: Codable {
-    var created_at: String
+    var createdAt: String
     var text: String
 }
 
