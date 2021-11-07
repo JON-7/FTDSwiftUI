@@ -1,5 +1,5 @@
 # Fake Tweet Detector
-- iOS application that allows users to verify the authenticity of a tweet found online
+- SwiftUI application that allows users to verify the authenticity of a tweet found online
 - Users can either take a photo of a tweet or choose one from their camera roll
 
 ## App Previews: 
