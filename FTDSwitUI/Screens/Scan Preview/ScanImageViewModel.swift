@@ -41,18 +41,25 @@ final class ScanImageViewModel: ObservableObject {
     }
     
     func getTweetInfo(text: String) -> TweetBody {
-        let pattern = "[0-9]*[:][0-9]{2}.([AaPP][Mm]).*[aA-zZ]{3}.[0-9]*[,].[0-9]{4}"
+        var tweetDate = ""
+        var tweetDateFormat: TweetDateFormat = .desktop
         let randomId = UUID()
         var filteredText = ""
         var username = ""
         
-        // Finding the Tweet date
-        guard let datePattern = text.matches(for: pattern).first else {
-            return TweetBody(username: "", tweetText: "", stringDate: "", date: Date())
+        // Finding the date of the tweet
+        if let desktopPattern = text.matches(for: TweetDatePattern.desktopDate).first {
+            tweetDate = desktopPattern
+            tweetDateFormat = .desktop
         }
         
-        //Finding the Tweet body
-        filteredText = text.replacingOccurrences(of: datePattern, with: "\(randomId)")
+        if let mobilePattern = text.matches(for: TweetDatePattern.mobileDate).first {
+            tweetDate = mobilePattern.cleanString
+            tweetDateFormat = .mobile
+        }
+        
+        // Finding the Tweet body
+        filteredText = text.replacingOccurrences(of: tweetDate, with: "\(randomId)")
         
         // Finding the username
         let tweetArray = filteredText.components(separatedBy: " ")
@@ -64,13 +71,19 @@ final class ScanImageViewModel: ObservableObject {
         
         return TweetBody(username: username,
                          tweetText: text,
-                         stringDate: datePattern,
-                         date: getTweetDate(stringDate: datePattern.cleanString))
+                         stringDate: tweetDate,
+                         date: getTweetDate(stringDate: tweetDate.cleanString,
+                                            dateFormat: tweetDateFormat))
     }
     
-    func getTweetDate(stringDate: String) -> Date {
+    func getTweetDate(stringDate: String, dateFormat: TweetDateFormat) -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a MMM dd, yyyy"
+        switch dateFormat {
+        case .desktop:
+            formatter.dateFormat = "h:mm a MMM dd, yyyy"
+        case .mobile:
+            formatter.dateFormat = "h:mm a MM/dd/yy"
+        }
         let date = formatter.date(from: stringDate)
         
         return date ?? Date()

@@ -53,8 +53,15 @@ final class ResultViewModel: ObservableObject {
     // checks if the tweet found matches the text scanned from the image
     func verifyTweet(imageText: String, tweetText: String) -> Bool {
         let imageTextArray = imageText.cleanString.components(separatedBy: " ")
-        let tweetTextArray = tweetText.cleanString.components(separatedBy: " ")
+        var tweetTextArray = tweetText.cleanString.components(separatedBy: " ")
         var missingCount = 0
+        
+        //MARK: Vision kit sometimes mistakes an I for and l
+        for x in 0..<tweetTextArray.count {
+            if tweetTextArray[x] == "I" || tweetTextArray[x] == "l" {
+                tweetTextArray[x] = ""
+            }
+        }
         
         for n in 0..<tweetTextArray.count {
             if !imageTextArray.contains(tweetTextArray[n]) {

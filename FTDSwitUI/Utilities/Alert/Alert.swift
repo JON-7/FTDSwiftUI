@@ -20,8 +20,8 @@ struct AlertContext {
                                       message: Text("The data received from the server was invalid"),
                                       dismissButton: .default(Text("OK")))
     
-    static let invalidResponse = AlertItem(title: Text("Error"),
-                                           message: Text("Invalid response from the server"),
+    static let invalidResponse = AlertItem(title: Text("Tweet Not Detected"),
+                                           message: Text("Please scan another photo"),
                                            dismissButton: .default(Text("OK")))
     
     static let invalidData = AlertItem(title: Text("Error"),
