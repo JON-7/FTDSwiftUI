@@ -196,7 +196,6 @@
 			children = (
 				FC633959272F77C100AA7268 /* Alert */,
 				FC6339162729FA7F00AA7268 /* Constants.swift */,
-				FC633957272F774F00AA7268 /* Alert.swift */,
 				FCB958F72735FE7200FD8614 /* Keys.swift */,
 			);
 			path = Utilities;
@@ -224,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				FC63395A272F77D200AA7268 /* FTDAlert.swift */,
+				FC633957272F774F00AA7268 /* Alert.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";

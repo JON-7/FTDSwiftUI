@@ -8,5 +8,18 @@
 import Foundation
 
 enum FTDAlert: Error {
+    // Network errors
+    case invalidURL
+    case invalidResponse
+    case invalidData
+    case unableToComplete
+    
+    // Image errors
     case invalidImage
+    case dateNotFound
+    case handleNotFound
+    
+    // Twitter user errors
+    case invalidUser
+    case tweetsNotFound
 }

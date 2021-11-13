@@ -11,24 +11,24 @@ struct ResultView: View {
     
     @StateObject var viewModel = ResultViewModel()
     @State var tweetBody: TweetBody
-
+    
     var body: some View {
         ZStack {
             Color.mainBackgroundColor.ignoresSafeArea()
             
             ZStack {
                 VStack {
-
+                    
                     Text(viewModel.isTweetReal ? "REAL TWEET" : "FAKE TWEET")
                         .font(.largeTitle)
                         .fontWeight(.light)
                         .foregroundColor(viewModel.isTweetReal ? .green : .red)
                     
-                    AppImages.realTweet
+                    Image(viewModel.isTweetReal ? AppImages.realTweet : AppImages.fakeTweet)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width * 0.8,
-                               height: UIScreen.main.bounds.width * 0.4)
+                        .frame(width: UIScreen.main.bounds.width * 0.7,
+                               height: UIScreen.main.bounds.width * 0.35)
                     
                     TweetComponentResult(title: "Username",
                                          text: tweetBody.username,
@@ -58,16 +58,36 @@ struct ResultView: View {
                     LoadingView()
                 }
             }
+            .alert(item: $viewModel.alertItem) { alertItem in
+                Alert(title: alertItem.title,
+                      message: alertItem.message,
+                      dismissButton: .default(
+                        Text("OK"),
+                        action: {
+                            viewModel.isSheetSelected = true
+                        }))
+            }
         }
         .onAppear {
-            viewModel.isLoading = true
-            viewModel.getTwitterID(username: tweetBody.username) { id in
+            setupView()
+        }
+    }
+    
+    func setupView() {
+        viewModel.isLoading = true
+        viewModel.getTwitterID(username: tweetBody.username) { id in
+            
+            viewModel.getUserTweets(id: id, startTime: tweetBody.date.dayBefore.toString, endTime: tweetBody.date.dayAfter.toString) { tweets in
                 
-                viewModel.getUserTweets(id: id, startTime: tweetBody.date.dayBefore.toString, endTime: tweetBody.date.dayAfter.toString) { tweets in
-                    
-                    viewModel.findTweet(imageText: tweetBody.tweetText, userTweets: tweets.data) { result in
-                        viewModel.isTweetReal = result
-                        viewModel.isLoading = false
+                viewModel.findTweet(imageText: tweetBody.tweetText, userTweets: tweets.data) { result in
+                    DispatchQueue.main.async {
+                        self.viewModel.isTweetReal = !result.isEmpty
+                        self.viewModel.isLoading = false
+                        if result.isEmpty {
+                            self.tweetBody.tweetText = "Tweet Not Found"
+                        } else {
+                            self.tweetBody.tweetText = result
+                        }
                     }
                 }
             }
@@ -82,7 +102,7 @@ struct TweetComponentResult: View {
     
     var body: some View {
         HStack() {
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.system(size: UIScreen.main.bounds.height * 0.04,
                                   weight: .semibold))

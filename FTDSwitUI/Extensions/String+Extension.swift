@@ -26,4 +26,12 @@ extension String {
         let components = self.components(separatedBy: .whitespacesAndNewlines)
         return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
+    
+    var cleanString: String {
+        var originalString = self
+        originalString = originalString.replacingOccurrences(of: ",", with: " ")
+        originalString = originalString.replacingOccurrences(of: "•", with: "")
+        originalString = originalString.replacingOccurrences(of: "-", with: " ")
+        return originalString
+    }
 }
