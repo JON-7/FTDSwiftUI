@@ -3,7 +3,7 @@
 - Users can either take a photo of a tweet or choose one from their camera roll
 
 ## App Previews: 
-Home Screen             |  Image of Tweet
+Home Screen             |  Result
 :-------------------------:|:-------------------------:|
 ![](https://i.ibb.co/C7JM8DF/IMG-921691-EAB155-1.jpg) | ![](https://i.ibb.co/b2LbNwP/IMG-EA16-FF91-CBB4-1.jpg) |
 
